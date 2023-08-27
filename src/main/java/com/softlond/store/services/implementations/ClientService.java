@@ -27,18 +27,30 @@ public class ClientService implements IClientService{
     }
     @Override
     public ResponseEntity<Client> create(Client client) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        try{
+            Client clientSaved = this.clientRepository.save(client);
+            return new ResponseEntity<Client>(clientSaved, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<Client>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     @Override
     public ResponseEntity<Client> update(Client client) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        try{
+            Client clientUpdated = this.clientRepository.save(client);
+            return new ResponseEntity<Client>(clientUpdated, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<Client>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     @Override
     public ResponseEntity<Boolean> delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        try{
+            this.clientRepository.deleteById(id);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     

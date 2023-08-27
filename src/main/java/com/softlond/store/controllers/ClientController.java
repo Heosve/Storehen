@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softlond.store.entities.Client;
 import com.softlond.store.services.contracts.IClientService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 
@@ -25,5 +29,19 @@ public class ClientController {
         return this.clientService.findAll();
     }
     
+    @PostMapping("/create")
+    private ResponseEntity<Client> createCategory(Client client) {
+        return this.clientService.create(client);
+    }
+    
+    @PutMapping("/update")
+    private ResponseEntity<Client> updateCategory(Client client) {
+        return this.clientService.update(client);
+    }
+
+    @DeleteMapping("/delete")
+    private ResponseEntity<Boolean> deleteCategory(Long id) {
+        return this.clientService.delete(id);
+    }
     
 }
