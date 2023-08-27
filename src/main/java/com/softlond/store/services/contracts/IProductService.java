@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IProductService {
     public ResponseEntity<List<Product>> findAll();
-
+        
     public ResponseEntity<Product> created(Product product);
 
     public ResponseEntity<Product> update(Product product);
