@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService implements IProductService {
@@ -65,6 +66,22 @@ public class ProductService implements IProductService {
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Product> findById(Long id) {
+        try {
+            Optional<Product> productOptional = this.productRepository.findById(id);
+            
+            if (productOptional.isPresent()) {
+                Product product = productOptional.get();
+                return new ResponseEntity<Product>(product, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Product>(HttpStatus.NOT_FOUND); // Opción si el producto no se encuentra
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

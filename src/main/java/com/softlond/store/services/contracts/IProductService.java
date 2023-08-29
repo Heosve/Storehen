@@ -13,4 +13,6 @@ public interface IProductService {
     public ResponseEntity<Product> update(Product product);
 
     public ResponseEntity<Boolean> delete(Long id);
+
+    public ResponseEntity<Product> findById(Long id);
 }

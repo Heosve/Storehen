@@ -9,7 +9,7 @@ public class ShoppingCar extends Product{
         this.quantity = quantity;
     }
 
-    public void increaseAmount(){
+    public void increaseAmount(int quantity){
         this.quantity++;
     }
 
@@ -19,6 +19,10 @@ public class ShoppingCar extends Product{
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public float getTotal() {
+        return getPrice()*quantity;
     }
 
 
