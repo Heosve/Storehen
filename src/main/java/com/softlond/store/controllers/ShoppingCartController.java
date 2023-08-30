@@ -19,11 +19,8 @@ import com.softlond.store.services.contracts.IShoppingCartService;
 @RequestMapping("/shopping-cart")
 public class ShoppingCartController {
 
-
     @Autowired
     private IShoppingCartService shoppingCartService;
-
-
 
     @PostMapping("/add")
     public ResponseEntity<String> addToCart(@RequestBody Product product, @RequestParam int quantity) {
@@ -53,5 +50,4 @@ public class ShoppingCartController {
         return ResponseEntity.ok(total);
     }
 
-    
 }
