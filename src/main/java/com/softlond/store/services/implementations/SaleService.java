@@ -1,5 +1,8 @@
 package com.softlond.store.services.implementations;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -36,6 +39,14 @@ public class SaleService implements ISaleServices{
     public ResponseEntity<Sale> created(Sale sale) {
         ResponseEntity<Sale> response = new ResponseEntity<Sale>(HttpStatus.OK);
         try {
+                        // Genera la fecha actual
+
+                        // Obtener la fecha y hora actual
+            Calendar calendar = Calendar.getInstance();
+            Timestamp currentTimestamp = new Timestamp(calendar.getTime().getTime());
+            
+            // Establecer la fecha y hora actual en la venta
+            sale.setDate(currentTimestamp);
             Sale newSale = this.saleRepository.save(sale);
             response = new ResponseEntity<Sale>(newSale, HttpStatus.OK);
             return response;

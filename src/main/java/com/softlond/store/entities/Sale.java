@@ -1,19 +1,27 @@
 package com.softlond.store.entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "sales")
+@EntityListeners(AuditingEntityListener.class)
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Float total;
-    private Date date;
 
-    public Sale(Long id, Float total, Date date) {
+    @CreatedDate
+    private Timestamp date;
+
+    public Sale(Long id, Float total, Timestamp date) {
         this.id = id;
         this.total = total;
         this.date = date;
@@ -25,9 +33,17 @@ public class Sale {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Product> products;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public Long getId() {
         return id;
@@ -45,12 +61,12 @@ public class Sale {
         this.total = total;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Timestamp currentTimestamp) {
+        this.date = currentTimestamp;
     }
 
 }

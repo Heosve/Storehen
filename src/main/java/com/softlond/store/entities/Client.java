@@ -1,5 +1,7 @@
 package com.softlond.store.entities;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,17 @@ public class Client {
     private String email;
     private String phone;
     private String address;
+
+    @OneToMany(mappedBy = "client")
+    private List<Sale> sales;
+
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
+    }
 
     public Long getId() {
         return id;
